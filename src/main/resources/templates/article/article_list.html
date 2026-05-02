@@ -1,10 +1,18 @@
 <html layout:decorate="~{layout}" xmlns:sec="http://www.w3.org/1999/xhtml" xmlns:layout="http://www.w3.org/1999/xhtml">
 <div layout:fragment="content" class="container">
     <h2 class="mb-3">게시물 목록</h2>
+
+    <!-- 검색 결과 안내 (검색어가 있을 때만 노출) -->
+    <div th:if="${not #strings.isEmpty(keyword)}" class="alert alert-info py-2">
+        <strong>"[[${keyword}]]"</strong> 검색 결과 : <span th:text="${#lists.size(articleList)}"></span>건
+        <a th:href="@{/article/list}" class="btn btn-sm btn-link text-decoration-none">초기화</a>
+    </div>
+
     <table class="table table-hover">
         <thead class="table-dark">
         <tr>
             <th>제목</th>
+            <th>작성자</th>
             <th>작성일</th>
         </tr>
         </thead>
@@ -13,7 +21,16 @@
             <td>
                 <a th:href="@{|/article/detail/${article.id}|}" th:text="${article.title}"></a>
             </td>
+            <!-- 작성자 이름 표시 (author가 null일 경우를 대비해 '익명' 처리) -->
+            <td>
+                <span th:if="${article.author != null}" th:text="${article.author.username}"></span>
+                <span th:if="${article.author == null}" class="text-muted small">익명</span>
+            </td>
             <td th:text="${#temporals.format(article.createdDate,'yyyy-MM-dd HH:mm')}"></td>
+        </tr>
+        <!-- 결과가 없을 때 -->
+        <tr th:if="${#lists.isEmpty(articleList)}">
+            <td colspan="3" class="text-center py-5 text-muted">게시물이 없다이!</td>
         </tr>
         </tbody>
     </table>
