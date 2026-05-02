@@ -1,10 +1,11 @@
 package com.back.p13202.domain.user;
 
+import com.back.p13202.global.exception.DataNotFoundException;
 import com.back.p13202.global.exception.DuplicateUserName;
-import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @Transactional
@@ -26,5 +27,11 @@ public class UserService {
                 .build();
         this.userRepository.save(user);
         return user;
+    }
+
+    @Transactional(readOnly = true)
+    public User getUser(String username) {
+        return userRepository.findByUsername(username)
+                .orElseThrow(() -> new DataNotFoundException("해당 유저를 찾을 수 없다이"));
     }
 }
