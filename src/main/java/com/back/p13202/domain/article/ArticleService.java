@@ -1,5 +1,6 @@
 package com.back.p13202.domain.article;
 
+import com.back.p13202.domain.user.User;
 import com.back.p13202.global.exception.DataNotFoundException;
 import org.springframework.transaction.annotation.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -15,11 +16,12 @@ public class ArticleService {
     private final ArticleRepository articleRepository;
 
     @Transactional
-    public void create(String title, String content){
+    public void create(String title, String content, User author){
         Article article = Article.builder()
                 .title(title)
                 .content(content)
                 .createdDate(LocalDateTime.now())
+                .author(author)
                 .build();
 
         articleRepository.save(article);
@@ -46,6 +48,11 @@ public class ArticleService {
     @Transactional
     public void deleteArticle(Integer id) {
         articleRepository.deleteById(id);
+    }
+
+    @Transactional(readOnly = true)
+    public List<Article> searchArticles(String keyword) {
+        return articleRepository.findAllByKeyword(keyword);
     }
 }
 
