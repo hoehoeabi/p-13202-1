@@ -1,10 +1,13 @@
 package com.back.p13202.domain.article;
 
+import com.back.p13202.domain.user.User;
+import com.back.p13202.domain.user.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -13,12 +16,20 @@ import java.util.List;
 public class ArticleController {
 
     private final ArticleService articleService;
+    private final UserService userService;
 
     @GetMapping("/list")
-    public String list(Model model) {
-        List<Article> articleList = articleService.getAllArticles();
+    public String list(Model model, @RequestParam(value = "keyword", required = false) String keyword) {
+        List<Article> articleList;
+
+        if (keyword != null && !keyword.trim().isEmpty()) {
+            articleList = articleService.searchArticles(keyword);
+        } else {
+            articleList = articleService.getAllArticles();
+        }
 
         model.addAttribute("articleList", articleList);
+        model.addAttribute("keyword", keyword);
         return "article/article_list";
     }
 
@@ -31,8 +42,10 @@ public class ArticleController {
     }
 
     @PostMapping("/create")
-    public String create(ArticleForm articleForm){
-        articleService.create(articleForm.getTitle(), articleForm.getContent());
+    public String create(ArticleForm articleForm, Principal principal){
+        String username = principal.getName();
+        User user = userService.getUser(username);
+        articleService.create(articleForm.getTitle(), articleForm.getContent(),user);
         return "redirect:/article/list";
     }
 
