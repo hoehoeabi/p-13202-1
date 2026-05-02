@@ -25,8 +25,32 @@
 
 ## UI/UX (화면 캡처본을 복사 붙여 넣기, url 주소 나오도록)
 - 게시글 리스트 페이지
+  - 로그인
+<img width="1042" height="507" alt="스크린샷 2026-05-03 오전 1 47 06" src="https://github.com/user-attachments/assets/9e5bb042-35f7-4c88-a39e-bc24e2f412c4" />
+  - 비로그인
+<img width="1042" height="330" alt="스크린샷 2026-05-03 오전 1 48 55" src="https://github.com/user-attachments/assets/66d72a64-72e2-4e90-b9cd-7e54fea53a6f" />
+
 - 게시글 등록 폼 페이지
+<img width="1042" height="603" alt="스크린샷 2026-05-03 오전 1 47 23" src="https://github.com/user-attachments/assets/59b856d9-0554-4441-8fdb-3418791a2ccc" />
+
 - 게시글 상세 페이지
+  - 글 주인
+<img width="1042" height="386" alt="스크린샷 2026-05-03 오전 1 47 44" src="https://github.com/user-attachments/assets/bfd19ead-b2d9-4f45-86b8-8a4441afa8cd" />
+  - 비로그인 혹은 글주인이 아닐경우
+  <img width="1042" height="374" alt="스크린샷 2026-05-03 오전 1 49 37" src="https://github.com/user-attachments/assets/c97c46b4-9af0-442d-9d25-3dca8be3866f" />
+
+
+- 게시물 수정 페이지
+<img width="1042" height="611" alt="스크린샷 2026-05-03 오전 1 48 14" src="https://github.com/user-attachments/assets/366ff537-9ec9-4f7d-a566-5585960793ed" />
+
 - 로그인 페이지
+<img width="1042" height="485" alt="스크린샷 2026-05-03 오전 1 45 33" src="https://github.com/user-attachments/assets/44bbd390-f342-43b2-bc3b-e508ef07f13b" />
+<img width="1042" height="507" alt="스크린샷 2026-05-03 오전 1 46 50" src="https://github.com/user-attachments/assets/fea30f3b-7759-48ef-91cc-58cce30d2c2c" />
+
 - 회원가입 페이지
+<img width="1042" height="485" alt="스크린샷 2026-05-03 오전 1 45 44" src="https://github.com/user-attachments/assets/6db24b45-1ec8-46c2-8529-2522b63116e9" />
+<img width="1042" height="494" alt="스크린샷 2026-05-03 오전 1 46 13" src="https://github.com/user-attachments/assets/3e5409d9-cb60-4520-a04b-ac8c41a44af0" />
+<img width="1042" height="494" alt="스크린샷 2026-05-03 오전 1 46 30" src="https://github.com/user-attachments/assets/f9fd00f0-bf73-4b03-9792-41b448b72b71" />
+
+
 - (선택) 검색 페이지
