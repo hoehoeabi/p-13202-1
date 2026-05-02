@@ -43,5 +43,9 @@ public class ArticleService {
         article.updateArticle(title, content);
     }
 
+    @Transactional
+    public void deleteArticle(Integer id) {
+        articleRepository.deleteById(id);
+    }
 }
 
