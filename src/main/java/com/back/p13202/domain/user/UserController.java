@@ -4,6 +4,7 @@ import com.back.p13202.global.exception.DuplicateUserName;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,12 +20,14 @@ public class UserController {
     private final UserService userService;
 
     @GetMapping("/login")
-    public String login() {
+    public String login(Model model) {
+        model.addAttribute("hideSearch", true);
         return "user/login_form";
     }
 
     @GetMapping("/signup")
-    public String signup(SignupForm signupForm) {
+    public String signup(SignupForm signupForm,Model model) {
+        model.addAttribute("hideSearch", true);
         return "user/signup_form";
     }
 

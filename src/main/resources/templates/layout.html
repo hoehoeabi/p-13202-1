@@ -15,6 +15,17 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom mb-3">
     <div class="container-fluid">
         <a class="navbar-brand" th:href="@{/}">P13202 게시판</a>
+
+        <form class="d-flex mx-auto"
+              th:action="@{/article/list}"
+              method="get"
+              style="max-width: 400px; width: 100%;"
+              th:if="${hideSearch == null}">
+            <input class="form-control me-2" type="search" name="keyword"
+                   th:value="${param.keyword}" placeholder="제목, 내용, 작성자 검색" aria-label="Search">
+            <button class="btn btn-outline-success" type="submit">찾기</button>
+        </form>
+        
         <div class="d-flex">
             <div sec:authorize="isAnonymous()">
                 <a class="btn btn-outline-primary me-2" th:href="@{/user/login}">로그인</a>
