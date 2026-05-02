@@ -23,10 +23,8 @@ public class User implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Setter
     private String username;
 
-    @Setter
     private String password;
 
     // --- UserDetails 필수 구현 메서드 ---
