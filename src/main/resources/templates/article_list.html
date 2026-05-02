@@ -1,0 +1,21 @@
+<h2>게시물 목록</h2>
+
+<table class="table">
+    <thead>
+    <tr>
+        <th>제목</th>
+        <th>      </th>
+        <th>작성일(최종수정일)</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="article : ${articleList}">
+        <td>
+            <a th:href="@{|/article/detail/${article.id}|}" th:text="${article.title}"></a>
+        </td>
+        <td th:text="${#temporals.format(article.createdDate,'yyyy-MM-dd HH:mm')}"></td>
+    </tr>
+    </tbody>
+</table>
+
+<a href="/article/create" class="btn btn-primary">게시물 등록 </a>

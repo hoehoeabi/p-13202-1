@@ -1,0 +1,68 @@
+package com.back.p13202.domain.article;
+
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+@RequiredArgsConstructor
+@Controller
+@RequestMapping("/article")
+public class ArticleController {
+
+    private final ArticleService articleService;
+
+    @GetMapping("/list")
+    public String list(Model model) {
+        List<Article> articleList = articleService.getAllArticles();
+
+        model.addAttribute("articleList", articleList);
+        return "article_list";
+    }
+
+    @GetMapping("/create")
+    public String create(Model model) {
+        model.addAttribute("articleForm", new ArticleForm());
+
+        return "article_form";
+    }
+
+    @PostMapping("/create")
+    public String create(ArticleForm articleForm){
+        articleService.create(articleForm.getTitle(), articleForm.getContent());
+        return "redirect:/article/list";
+    }
+
+    @GetMapping("/detail/{id}")
+    public String detail(Model model, @PathVariable("id") Integer id){
+        Article article = articleService.getById(id);
+        model.addAttribute("article", article);
+
+        return "article_detail";
+    }
+
+    @GetMapping("/update")
+    public String update(Model model, @RequestParam("id") Integer id) {
+        Article article = articleService.getById(id);
+
+        ArticleForm articleForm = new ArticleForm();
+        articleForm.setTitle(article.getTitle());
+        articleForm.setContent(article.getContent());
+
+        model.addAttribute("articleForm", articleForm);
+        model.addAttribute("id", id);
+
+        return "article_form";
+    }
+
+    @PostMapping("/update")
+    public String update(@RequestParam("id") Integer id, ArticleForm articleForm) {
+        articleService.updateArticle(id, articleForm.getTitle(), articleForm.getContent());
+
+        return "redirect:/article/list";
+    }
+
+}
+

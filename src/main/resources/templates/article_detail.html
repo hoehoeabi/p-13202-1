@@ -1,0 +1,8 @@
+<h2>상세 페이지</h2>
+
+<div th:text="${article.title}"></div>
+<div th:text="${article.content}"></div>
+<div th:text="${#temporals.format(article.createdDate,'yyyy-MM-dd HH:mm')}"></div>
+
+<a th:href="@{/article/update(id=${article.id})}" class="btn btn-secondary">수정하기</a>
+<a th:href="@{/article/list}" class="btn btn-secondary">목록으로 돌아가기</a>

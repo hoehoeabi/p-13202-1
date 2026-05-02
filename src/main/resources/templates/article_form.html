@@ -1,0 +1,14 @@
+<form th:action="${id == null} ? @{/article/create} : @{/article/update}" th:object="${articleForm}" method="post">
+    <input type="hidden" name="id" th:value="${id}">
+
+    <div>
+        <label>제목</label>
+        <input type="text" th:field="*{title}" class="form-control">
+    </div>
+    <div>
+        <label>내용</label>
+        <textarea th:field="*{content}" rows="10" class="form-control"></textarea>
+    </div>
+
+    <button type="submit" th:text="${id == null} ? '등록하기' : '수정하기'"></button>
+</form>
