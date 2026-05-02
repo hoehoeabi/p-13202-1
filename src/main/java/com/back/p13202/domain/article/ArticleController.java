@@ -19,14 +19,15 @@ public class ArticleController {
         List<Article> articleList = articleService.getAllArticles();
 
         model.addAttribute("articleList", articleList);
-        return "article_list";
+        return "article/article_list";
     }
 
     @GetMapping("/create")
     public String create(Model model) {
         model.addAttribute("articleForm", new ArticleForm());
+        model.addAttribute("id", null);
 
-        return "article_form";
+        return "article/article_form";
     }
 
     @PostMapping("/create")
@@ -40,7 +41,7 @@ public class ArticleController {
         Article article = articleService.getById(id);
         model.addAttribute("article", article);
 
-        return "article_detail";
+        return "article/article_detail";
     }
 
     @GetMapping("/update")
@@ -54,7 +55,7 @@ public class ArticleController {
         model.addAttribute("articleForm", articleForm);
         model.addAttribute("id", id);
 
-        return "article_form";
+        return "article/article_form";
     }
 
     @PostMapping("/update")

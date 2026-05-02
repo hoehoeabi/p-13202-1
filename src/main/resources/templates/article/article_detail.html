@@ -1,0 +1,19 @@
+<html layout:decorate="~{layout}" xmlns:sec="http://www.w3.org/1999/xhtml" xmlns:layout="http://www.w3.org/1999/xhtml">
+<div layout:fragment="content" class="container">
+    <h2 class="mb-3">상세 페이지</h2>
+    <div class="card my-3">
+        <div class="card-body">
+            <h4 class="card-title border-bottom pb-2" th:text="${article.title}"></h4>
+            <div class="text-muted small mb-3" th:text="${#temporals.format(article.createdDate,'yyyy-MM-dd HH:mm')}"></div>
+            <p class="card-text" style="white-space: pre-line;" th:text="${article.content}"></p>
+        </div>
+    </div>
+
+    <div class="mt-3">
+        <a th:href="@{/article/update(id=${article.id})}"
+           class="btn btn-secondary"
+           sec:authorize="isAuthenticated()">수정하기</a>
+        <a th:href="@{/article/list}" class="btn btn-outline-secondary">목록으로</a>
+    </div>
+</div>
+</html>

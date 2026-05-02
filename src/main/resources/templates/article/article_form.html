@@ -1,0 +1,27 @@
+<html layout:decorate="~{layout}" xmlns:layout="http://www.w3.org/1999/xhtml">
+<div layout:fragment="content" class="container">
+    <h2 class="mb-3" th:text="${id == null} ? '게시물 등록' : '게시물 수정'"></h2>
+
+    <form th:action="${id == null} ? @{/article/create} : @{/article/update}" th:object="${articleForm}" method="post">
+        <!-- 수정 시 필수 ID -->
+        <input type="hidden" name="id" th:value="${id}">
+
+        <div th:if="${#fields.hasAnyErrors()}" class="alert alert-danger">
+            <div th:each="err : ${#fields.allErrors()}" th:text="${err}"></div>
+        </div>
+
+        <div class="mb-3">
+            <label for="title" class="form-label">제목</label>
+            <input type="text" th:field="*{title}" class="form-control" id="title">
+        </div>
+
+        <div class="mb-3">
+            <label for="content" class="form-label">내용</label>
+            <textarea th:field="*{content}" rows="10" class="form-control" id="content"></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-primary" th:text="${id == null} ? '등록하기' : '수정하기'"></button>
+        <a th:href="@{/article/list}" class="btn btn-outline-secondary">취소</a>
+    </form>
+</div>
+</html>
