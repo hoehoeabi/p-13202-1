@@ -1,7 +1,7 @@
 package com.back.p13202.domain.article;
 
 import com.back.p13202.global.exception.DataNotFoundException;
-import jakarta.transaction.Transactional;
+import org.springframework.transaction.annotation.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +14,7 @@ public class ArticleService {
 
     private final ArticleRepository articleRepository;
 
+    @Transactional
     public void create(String title, String content){
         Article article = Article.builder()
                 .title(title)
@@ -24,10 +25,12 @@ public class ArticleService {
         articleRepository.save(article);
     }
 
+    @Transactional(readOnly = true)
     public List<Article> getAllArticles() {
         return articleRepository.findAll();
     }
 
+    @Transactional(readOnly = true)
     public Article getById(Integer id) {
         return articleRepository.findById(id)
                 .orElseThrow(() -> new DataNotFoundException("게시물이 없다이"));
