@@ -5,6 +5,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import java.util.List;
+import java.util.Optional;
 
 
 public interface ArticleRepository extends JpaRepository<Article,Integer> {
@@ -17,4 +18,6 @@ public interface ArticleRepository extends JpaRepository<Article,Integer> {
             "   or a.content like %:keyword% " +
             "   or u.username like %:keyword% ")
     List<Article> findAllByKeyword(@Param("keyword") String keyword);
+
+    Optional<Article> findById(Integer id);
 }
