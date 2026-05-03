@@ -23,4 +23,10 @@ public class HomeController {
         model.addAttribute("articleList", articleList);
         return "article/article_list";
     }
+
+    @GetMapping("/error/403")
+    public String accessDenied() {
+        return "error/403";
+    }
+
 }
