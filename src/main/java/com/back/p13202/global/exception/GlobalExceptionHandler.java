@@ -1,6 +1,7 @@
 package com.back.p13202.global.exception;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.authorization.AuthorizationDeniedException;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -12,6 +13,14 @@ public class GlobalExceptionHandler {
     /**
      *   4XX 에러
      */
+
+    // 403
+    // @PreAuthorize에서 거부당했을 때 발생하는 예외를 잡음
+    @ExceptionHandler(AuthorizationDeniedException.class)
+    public String handleAuthorizationDeniedException(AuthorizationDeniedException e) {
+
+        return "redirect:/error/403";
+    }
 
     // 404 예외처리
     @ExceptionHandler(DataNotFoundException.class)
