@@ -3,6 +3,7 @@ package com.back.p13202.domain.article;
 import com.back.p13202.domain.user.User;
 import com.back.p13202.domain.user.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -57,6 +58,7 @@ public class ArticleController {
         return "article/article_detail";
     }
 
+    @PreAuthorize("isAuthenticated() and @articleAuthorizer.isAuthor(#id, principal.username)")
     @GetMapping("/update")
     public String update(Model model, @RequestParam("id") Integer id) {
         Article article = articleService.getById(id);
@@ -71,6 +73,7 @@ public class ArticleController {
         return "article/article_form";
     }
 
+    @PreAuthorize("isAuthenticated() and @articleAuthorizer.isAuthor(#id, principal.username)")
     @PostMapping("/update")
     public String update(@RequestParam("id") Integer id, ArticleForm articleForm) {
         articleService.updateArticle(id, articleForm.getTitle(), articleForm.getContent());
@@ -78,10 +81,17 @@ public class ArticleController {
         return "redirect:/article/list";
     }
 
+    @PreAuthorize("isAuthenticated() and @articleAuthorizer.isAuthor(#id, principal.username)")
     @PostMapping("/delete")
     public String delete(@RequestParam("id") Integer id) {
         articleService.deleteArticle(id);
 
+        return "redirect:/article/list";
+    }
+
+    @GetMapping("/delete")
+    public String deleteGet() {
+        // 삭제를 GET으로 시도하면 그냥 목록으로 보내버림
         return "redirect:/article/list";
     }
 
