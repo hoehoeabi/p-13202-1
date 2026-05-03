@@ -2,6 +2,7 @@ package com.back.p13202.domain.article;
 
 import com.back.p13202.domain.user.User;
 import com.back.p13202.global.exception.DataNotFoundException;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.transaction.annotation.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -38,6 +39,7 @@ public class ArticleService {
                 .orElseThrow(() -> new DataNotFoundException("게시물이 없다이"));
     }
 
+    @PreAuthorize("isAuthenticated() and @articleAuthorizer.isAuthor(#id, principal.username)")
     @Transactional
     public void updateArticle(Integer id,String title, String content) {
         Article article = articleRepository.findById(id)
@@ -45,6 +47,7 @@ public class ArticleService {
         article.updateArticle(title, content);
     }
 
+    @PreAuthorize("isAuthenticated() and @articleAuthorizer.isAuthor(#id, principal.username)")
     @Transactional
     public void deleteArticle(Integer id) {
         articleRepository.deleteById(id);
